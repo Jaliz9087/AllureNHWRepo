@@ -1,3 +1,5 @@
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selenide.$;
@@ -8,9 +10,12 @@ import static io.qameta.allure.Allure.step;
 
 
 public class SimpleTest extends TestBase {
+    public static final String REPOSITORY = "Jaliz9087/AllureNHWRepo";
+    public static final String TITLE = "ForTestIssue";
+     Steps steps = new Steps();
     @Test
     public void simpleGHTest(){
-        //SelenideLogger.addListener("allure", new AllureSelenide());
+        SelenideLogger.addListener("allure", new AllureSelenide());
         open("https://github.com");
         $(".search-input").click();
         $("#query-builder-test").sendKeys("Jaliz9087/AllureNHWRepo");
@@ -21,7 +26,7 @@ public class SimpleTest extends TestBase {
         $(withText("ForTestIssue")).should(Condition.exist);
     }
     @Test
-    public void lambdaTest(){
+     void lambdaTest(){
         step("Open main page", () ->{
             open("https://github.com");
         });
@@ -37,6 +42,14 @@ public class SimpleTest extends TestBase {
         step("Checking the header"+" " + TITLE, () ->{
             $(withText("ForTestIssue")).should(Condition.exist);
         });
+
+    }
+    @Test
+    public void stepsTest(){
+        steps.openMainPage();
+        steps.searchOurRepository();
+        steps.foundOurRepo();
+        steps.checkingHeader();
 
     }
 }

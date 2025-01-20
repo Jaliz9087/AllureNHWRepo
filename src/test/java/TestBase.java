@@ -1,4 +1,17 @@
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
+
 public class TestBase {
-    public static final String REPOSITORY = "Jaliz9087/AllureNHWRepo";
-    public static final String TITLE = "ForTestIssue";
+
+
+    @BeforeAll
+    static void beforeAll() {
+        Configuration.baseUrl = "https://github.com/";
+        Configuration.browserSize = "1980x1080";
+        Configuration.pageLoadStrategy = "eager";
+
+    }
 }
+
+
+
